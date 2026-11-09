@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special For Keisha Bunga Azizah</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Corben:wght@700&family=Lora:ital,wght@0,400;0,600;1,400&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Pola Background Gingham Merah Marun (Sesuai Gambar Referensi) */
+        body {
+            background-color: #9e4244;
+            background-image:
+                repeating-linear-gradient(0deg, rgba(110, 15, 18, 0.45) 0px, rgba(110, 15, 18, 0.45) 45px, transparent 45px, transparent 90px),
+                repeating-linear-gradient(90deg, rgba(110, 15, 18, 0.45) 0px, rgba(110, 15, 18, 0.45) 45px, transparent 45px, transparent 90px);
+            font-family: 'Quicksand', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            user-select: none;
+        }
+
+        /* Font Khusus Judul ala Retro sesuai foto */
+        .font-title {
+            font-family: 'Corben', serif;
+            text-shadow: 2px 3px 0px rgba(80, 10, 12, 0.6);
+        }
+
+        /* Font Khusus Surat & Hint */
+        .font-serif-custom {
+            font-family: 'Lora', serif;
+        }
+
+        /* Animasi Getar saat PIN Salah */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-8px); }
+            40%, 80% { transform: translateX(8px); }
+        }
+        .shake {
+            animation: shake 0.4s ease-in-out;
+        }
+
+        /* Efek Tekan Tombol Numpad */
+        .numpad-btn {
+            background-color: #7c0a0d;
+            box-shadow: 0 4px 0 #4a0406;
+            transition: all 0.1s ease;
+        }
+        .numpad-btn:active {
+            transform: translateY(3px);
+            box-shadow: 0 1px 0 #4a0406;
+        }
+
+        /* Desain Amplop Interaktif */
+        .envelope-wrapper {
+            perspective: 1000px;
+            cursor: pointer;
+        }
+        .envelope {
+            position: relative;
+            width: 280px;
+            height: 180px;
+            background: #fdfaf6;
+            border-radius: 12px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+            border: 3px solid #2b090a;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        .envelope:hover {
+            transform: translateY(-5px) scale(1.02);
+        }
+        /* Lipatan Bawah & Samping Amplop */
+        .envelope::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 140px solid #f2e9e1;
+            border-right: 140px solid #eadfd5;
+            border-top: 95px solid transparent;
+            z-index: 2;
+        }
+        /* Penutup Atas Amplop */
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 140px solid transparent;
+            border-right: 140px solid transparent;
+            border-top: 105px solid #e2d4c8;
+            z-index: 3;
+            transform-origin: top;
+            transition: transform 0.4s ease;
+            filter: drop-shadow(0 2px 3px rgba(0,0,0,0.15));
+        }
+        .envelope:hover .envelope-flap {
+            transform: rotateX(25deg);
+        }
+        /* Segel Hati di Tengah Amplop */
+        .wax-seal {
+            position: absolute;
+            top: 52%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 4;
+            width: 48px;
+            height: 48px;
+            background: #7c0a0d;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+            border: 2px solid #f9d8d6;
+            transition: transform 0.3s ease;
+        }
+        .envelope:hover .wax-seal {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        /* Transisi Halus Antar Layar */
+        .fade-enter {
+            animation: fadeIn 0.7s ease forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Efek Kertas Surat Sungguhan */
+        .real-paper {
+            background-color: #fcf8f2;
+            background-image: 
+                linear-gradient(90deg, transparent 39px, rgba(212, 140, 140, 0.35) 39px, rgba(212, 140, 140, 0.35) 41px, transparent 41px),
+                repeating-linear-gradient(transparent, transparent 31px, rgba(160, 145, 130, 0.25) 31px, rgba(160, 145, 130, 0.25) 32px);
+            box-shadow: 
+                0 20px 50px rgba(0, 0, 0, 0.5),
+                inset 0 0 40px rgba(185, 155, 120, 0.2);
+            border: 1px solid #e2d5c4;
+            position: relative;
+        }
+        /* Efek selotip di atas kertas */
+        .paper-tape {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-2deg);
+            width: 110px;
+            height: 28px;
+            background: rgba(255, 248, 235, 0.65);
+            border: 1px solid rgba(210, 195, 175, 0.5);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+            backdrop-filter: blur(2px);
+        }
+        .paper-text {
+            line-height: 32px;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center p-4 min-h-screen">
+
+    <!-- ================= 1. LAYAR PIN (ENTER CODE) ================= -->
+    <div id="pin-screen" class="flex flex-col items-center justify-center w-full max-w-md z-10 transition-opacity duration-500">
+        
+        <!-- Judul Enter Code -->
+        <h1 class="text-white text-3xl sm:text-4xl font-title mb-6 tracking-wide text-center">
+            Enter Code
+        </h1>
+
+        <!-- 6 Kotak Indikator PIN (untuk 100926) -->
+        <div id="pin-boxes" class="flex space-x-2 sm:space-x-2.5 mb-4">
+            <!-- Di-generate otomatis oleh JavaScript -->
+        </div>
+
+        <!-- Teks Hint -->
+        <p id="pin-hint" class="text-white/95 font-serif-custom text-xs sm:text-sm mb-6 tracking-wide text-center px-4">
+            Hint: The day you finally said “YES” to me.
+        </p>
+
+        <!-- Keypad Angka -->
+        <div class="bg-white p-4 sm:p-5 rounded-[28px] border-[3px] border-[#2b090a] shadow-2xl w-64 sm:w-72">
+            <div class="grid grid-cols-3 gap-3 sm:gap-3.5">
+                <button onclick="pressPin('1')" class="numpad-btn text-white font-bold text-xl py-3 rounded-2xl">1</button>
+                <button onclick="pressPin('2')" class="numpad-btn text-white font-bold text-xl py-3 rounded-2xl">2</button>
+                <button onclick="pressPin('3')" class="numpad-btn text-white font-bold text-xl py-3 rounded-2xl">3</button>
+                
+                <button onclick="pressPin('4')" class="numpad-btn text-white font-bold text-xl py-3 rounded-2xl">4</button>
+                <button onclick="pressPin('5')" class="numpad-btn text-white font-bold text-xl py-3 rounded-2xl">5</button>
+                <button onclick="pressPin('6')" class="numpad-btn text-white font-bold text-xl py-3 rounded-2xl">6</button>
+                
+                <button onclick="pressPin('7')" class="numpad-btn text-white font-bold text-xl py-3 rounded-2xl">7</button>
+                <button onclick="pressPin('8')" class="numpad-btn text-white font-bold text-xl py-3 rounded-2xl">8</button>
+                <button onclick="pressPin('9')" class="numpad-btn text-white font-bold text-xl py-3 rounded-2xl">9</button>
+                
+                <button onclick="pressPin('.')" class="numpad-btn text-white font-bold text-xl py-3 rounded-2xl">.</button>
+                <button onclick="pressPin('0')" class="numpad-btn text-white font-bold text-xl py-3 rounded-2xl">0</button>
+                <button onclick="deletePin()" class="numpad-btn text-white font-bold text-sm sm:text-base py-3 rounded-2xl flex items-center justify-center tracking-wider">DEL</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ================= 2. LAYAR UTAMA (SETELAH LOGIN) ================= -->
+    <div id="main-screen" class="hidden flex-col items-center w-full max-w-lg py-8 px-2 space-y-8 z-10">
+        
+        <!-- Header Sambutan -->
+        <div class="text-center">
+            <h1 class="text-white text-2xl sm:text-3xl font-title">Happy 2nd Mensiversary!</h1>
+        </div>
+
+        <!-- A. Penghitung Hari (Sejak 10 September 2026) -->
+        <div class="bg-[#fdfaf6] w-full p-5 sm:p-6 rounded-3xl border-[3px] border-[#2b090a] shadow-xl text-center">
+            <h2 class="text-[#7c0a0d] font-serif-custom font-semibold text-sm sm:text-base mb-1">
+                Waktu Bersama Sejak 10 September 2026
+            </h2>
+            <p class="text-xs text-gray-500 mb-4">Dan masih akan terus berjalan ♡</p>
+            
+            <div class="grid grid-cols-4 gap-2 sm:gap-3">
+                <div class="bg-[#7c0a0d] text-white p-3 rounded-2xl shadow-inner border border-[#4a0406]">
+                    <div id="days" class="text-2xl sm:text-3xl font-bold">0</div>
+                    <div class="text-[10px] sm:text-xs uppercase tracking-wider opacity-85 mt-1">Hari</div>
+                </div>
+                <div class="bg-[#7c0a0d] text-white p-3 rounded-2xl shadow-inner border border-[#4a0406]">
+                    <div id="hours" class="text-2xl sm:text-3xl font-bold">00</div>
+                    <div class="text-[10px] sm:text-xs uppercase tracking-wider opacity-85 mt-1">Jam</div>
+                </div>
+                <div class="bg-[#7c0a0d] text-white p-3 rounded-2xl shadow-inner border border-[#4a0406]">
+                    <div id="minutes" class="text-2xl sm:text-3xl font-bold">00</div>
+                    <div class="text-[10px] sm:text-xs uppercase tracking-wider opacity-85 mt-1">Menit</div>
+                </div>
+                <div class="bg-[#7c0a0d] text-white p-3 rounded-2xl shadow-inner border border-[#4a0406]">
+                    <div id="seconds" class="text-2xl sm:text-3xl font-bold">00</div>
+                    <div class="text-[10px] sm:text-xs uppercase tracking-wider opacity-85 mt-1">Detik</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- B. Pemutar Video Kenangan -->
+        <div class="bg-[#fdfaf6] w-full p-4 sm:p-5 rounded-3xl border-[3px] border-[#2b090a] shadow-xl flex flex-col items-center">
+            <div class="flex items-center space-x-2 mb-3">
+                <span class="text-[#7c0a0d]">♥</span>
+                <h2 class="text-[#7c0a0d] font-serif-custom font-semibold text-base">Our Memories</h2>
+                <span class="text-[#7c0a0d]">♥</span>
+            </div>
+
+            <!-- Frame Video -->
+            <div class="w-full bg-black rounded-2xl overflow-hidden border-2 border-[#7c0a0d] shadow-md relative">
+                <!-- Menggunakan nama file video asli yang Anda kirim -->
+                <video id="memory-video" class="w-full max-h-[380px] object-contain mx-auto" controls loop playsinline>
+                    <source id="video-source" src="lv_7627363046083628304_20261110005501.mp4" type="video/mp4">
+                    <source src="video.mp4" type="video/mp4">
+                    Browser Anda tidak mendukung pemutar video.
+                </video>
+            </div>
+
+            <!-- Panel Bantuan Pembuat File Siap Kirim (Hanya tampil untuk Anda sebelum dikirim) -->
+            <div id="video-loader-box" class="mt-3 w-full bg-[#f8eded] p-3 rounded-2xl border border-[#7c0a0d]/20 flex flex-col items-center text-center space-y-2">
+                <p class="text-[11px] text-[#7c0a0d] font-medium">
+                    💡 <b>Ingin dikirim ke HP Keisha?</b> Pilih video Anda di bawah ini, lalu klik tombol <b>Download File Siap Kirim</b> agar videonya menyatu di dalam kode HTML.
+                </p>
+                
+                <div class="flex flex-wrap justify-center gap-2">
+                    <label class="cursor-pointer bg-white hover:bg-gray-50 text-[#7c0a0d] text-xs font-semibold px-3.5 py-1.5 rounded-full border border-[#7c0a0d]/40 shadow-sm transition flex items-center space-x-1.5">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                        <span>1. Pilih Video</span>
+                        <input type="file" accept="video/*" class="hidden" onchange="loadCustomVideo(event)">
+                    </label>
+
+                    <button id="btn-export-html" onclick="exportStandaloneHTML()" class="hidden bg-[#7c0a0d] hover:bg-[#5a0709] text-white text-xs font-semibold px-3.5 py-1.5 rounded-full shadow-sm transition flex items-center space-x-1.5">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                        <span id="export-btn-text">2. Download HTML Siap Kirim</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- C. Tombol Desain Amplop -->
+        <div class="flex flex-col items-center pt-2 pb-6">
+            <p class="text-white font-serif-custom text-sm mb-3 animate-bounce">
+                ✨ Ketuk amplop di bawah untuk membuka surat ✨
+            </p>
+            
+            <div onclick="openLetter()" class="envelope-wrapper" title="Klik untuk membuka pesan">
+                <div class="envelope">
+                    <div class="envelope-flap"></div>
+                    <div class="wax-seal">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#f5b0b6]" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="absolute bottom-3 w-full text-center z-10">
+                        <span class="text-[11px] font-serif-custom text-[#7c0a0d] font-semibold tracking-wider uppercase">
+                            For: Keisha Bunga Azizah
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- ================= 3. MODAL SURAT PESAN (POPUP AMPLOP) ================= -->
+    <div id="letter-modal" class="fixed inset-0 bg-black/75 backdrop-blur-sm hidden items-center justify-center p-4 z-50 transition-opacity">
+        <div class="real-paper max-w-md w-full pt-8 pb-7 pl-12 pr-6 sm:pl-14 sm:pr-8 rounded-md fade-enter transform rotate-[-0.5deg]">
+            
+            <!-- Hiasan Selotip Kertas -->
+            <div class="paper-tape"></div>
+
+            <!-- Header Surat Tanpa Tanggal -->
+            <div class="flex items-center space-x-2 mb-2">
+                <span class="text-[#7c0a0d] text-lg">💌</span>
+                <span class="font-serif-custom font-bold text-[#7c0a0d] text-sm sm:text-base italic">Dear Keisha,</span>
+            </div>
+
+            <!-- Isi Pesan di Atas Garis Kertas -->
+            <div class="font-serif-custom text-[#2b090a] text-sm sm:text-[15px] paper-text text-justify">
+                <p>
+                    Selamat tanggal sepuluh yang kedua untuk kita, <strong class="text-[#7c0a0d]">Keisha Bunga Azizah</strong>. Dua bulan mungkin terdengar singkat bagi waktu, tetapi bersamamu, setiap harinya selalu penuh makna dan cerita baru. Terima kasih telah menjadi tempat paling teduh untuk pulang, sekaligus alasan di balik tenangnya hatiku akhir-akhir ini. Semoga langkah kita ke depan selalu searah dan semakin menguatkan.
+                </p>
+            </div>
+
+            <!-- Tanda Tangan / Pengirim -->
+            <div class="mt-6 text-right font-serif-custom text-[#7c0a0d] space-y-0.5">
+                <p class="italic text-xs text-gray-600">Dari,</p>
+                <p class="font-bold text-sm sm:text-base tracking-wide">Silah Dewangga ♥</p>
+            </div>
+
+            <!-- Tombol Tutup Surat -->
+            <button onclick="closeLetter()" class="mt-6 w-full numpad-btn text-white font-bold py-2.5 rounded-xl text-sm tracking-wide">
+                Lipat Kembali Surat
+            </button>
+        </div>
+    </div>
+
+
+    <!-- ================= JAVASCRIPT LOGIC ================= -->
+    <script>
+        const TARGET_PIN = "100926";
+        let currentPin = "";
+
+        // SVG Icon Hati Pink (Sesuai Foto Kedua)
+        const heartSVG = `
+            <svg viewBox="0 0 24 24" fill="#f2b6bc" class="w-6 h-6 sm:w-7 sm:h-7">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+        `;
+
+        // Render 6 Kotak PIN
+        function renderPinBoxes() {
+            const container = document.getElementById("pin-boxes");
+            container.innerHTML = "";
+            for (let i = 0; i < 6; i++) {
+                const box = document.createElement("div");
+                box.className = "w-10 h-11 sm:w-12 sm:h-12 bg-white rounded-xl border-[2.5px] border-[#2b090a] flex items-center justify-center text-xl sm:text-2xl font-bold text-[#7c0a0d] shadow-md transition-transform duration-150";
+                
+                // Jika sudah diisi angka, tampilkan pola hati (angka disembunyikan)
+                // Jika belum diisi, biarkan kotak kosong
+                if (i < currentPin.length) {
+                    box.innerHTML = heartSVG;
+                    box.classList.add("scale-105");
+                }
+                container.appendChild(box);
+            }
+        }
+
+        // Fungsi Tekan Angka di Keypad
+        function pressPin(digit) {
+            if (currentPin.length < 6) {
+                currentPin += digit;
+                renderPinBoxes();
+
+                // Jika sudah 6 digit, cek apakah benar
+                if (currentPin.length === 6) {
+                    setTimeout(checkPin, 200);
+                }
+            }
+        }
+
+        // Fungsi Hapus Angka (DEL)
+        function deletePin() {
+            if (currentPin.length > 0) {
+                currentPin = currentPin.slice(0, -1);
+                renderPinBoxes();
+            }
+        }
+
+        // Mendukung input dari Keyboard Fisik juga
+        document.addEventListener("keydown", (e) => {
+            if (document.getElementById("pin-screen").classList.contains("hidden")) return;
+            if (e.key >= "0" && e.key <= "9") {
+                pressPin(e.key);
+            } else if (e.key === "Backspace") {
+                deletePin();
+            }
+        });
+
+        // Cek Kebenaran PIN
+        function checkPin() {
+            if (currentPin === TARGET_PIN) {
+                // PIN Benar -> Buka halaman utama
+                const pinScreen = document.getElementById("pin-screen");
+                const mainScreen = document.getElementById("main-screen");
+                
+                pinScreen.classList.add("opacity-0");
+                setTimeout(() => {
+                    pinScreen.classList.add("hidden");
+                    mainScreen.classList.remove("hidden");
+                    mainScreen.classList.add("flex", "fade-enter");
+                    
+                    // Putar video otomatis setelah masuk
+                    const video = document.getElementById("memory-video");
+                    video.play().catch(() => {
+                        // Jika autoplay diblokir browser, user tinggal klik play
+                    });
+                }, 400);
+            } else {
+                // PIN Salah -> Efek getar dan reset
+                const boxes = document.getElementById("pin-boxes");
+                const hint = document.getElementById("pin-hint");
+                
+                boxes.classList.add("shake");
+                hint.textContent = "Oops! Kode salah, coba ingat tanggal spesial kita ♡";
+                hint.classList.add("text-yellow-200");
+
+                setTimeout(() => {
+                    boxes.classList.remove("shake");
+                    currentPin = "";
+                    renderPinBoxes();
+                }, 500);
+            }
+        }
+
+        // Fungsi Hitung Hari Sejak 10 September 2026
+        function startCounter() {
+            // Tanggal mulai: 10 September 2026 pukul 00:00:00
+            const startDate = new Date("2026-09-10T00:00:00");
+
+            function update() {
+                const now = new Date();
+                const diff = now - startDate;
+
+                if (diff >= 0) {
+                    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                    const minutes = Math.floor((diff / 1000 / 60) % 60);
+                    const seconds = Math.floor((diff / 1000) % 60);
+
+                    document.getElementById("days").textContent = days;
+                    document.getElementById("hours").textContent = String(hours).padStart(2, "0");
+                    document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
+                    document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
+                }
+            }
+
+            update();
+            setInterval(update, 1000);
+        }
+
+        // Fungsi Buka & Tutup Amplop Surat
+        function openLetter() {
+            const modal = document.getElementById("letter-modal");
+            modal.classList.remove("hidden");
+            modal.classList.add("flex");
+        }
+
+        function closeLetter() {
+            const modal = document.getElementById("letter-modal");
+            modal.classList.add("hidden");
+            modal.classList.remove("flex");
+        }
+
+        let embeddedVideoDataUrl = null;
+
+        // Fungsi Memuat Video & Mengubahnya Menjadi Kode Internal (Base64)
+        function loadCustomVideo(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const videoUrl = URL.createObjectURL(file);
+                const video = document.getElementById("memory-video");
+                const source = document.getElementById("video-source");
+                
+                source.src = videoUrl;
+                video.load();
+                video.play();
+
+                // Konversi file video agar bisa disatukan ke dalam 1 file HTML
+                const exportBtn = document.getElementById("btn-export-html");
+                const exportText = document.getElementById("export-btn-text");
+                exportBtn.classList.remove("hidden");
+                exportText.textContent = "Memproses video...";
+                exportBtn.disabled = true;
+
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    embeddedVideoDataUrl = e.target.result;
+                    exportText.textContent = "2. Download HTML Siap Kirim";
+                    exportBtn.disabled = false;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Fungsi Download 1 File HTML yang Sudah Berisi Video di Dalamnya
+        function exportStandaloneHTML() {
+            if (!embeddedVideoDataUrl) return;
+
+            // Kloning dokumen saat ini untuk di-export dalam keadaan terkunci & bersih
+            const docClone = document.documentElement.cloneNode(true);
+            
+            // Reset tampilan ke layar PIN awal
+            const pinScreen = docClone.querySelector("#pin-screen");
+            const mainScreen = docClone.querySelector("#main-screen");
+            pinScreen.classList.remove("hidden", "opacity-0");
+            mainScreen.classList.add("hidden");
+            mainScreen.classList.remove("flex");
+
+            // Tanamkan data video langsung ke dalam tag <source>
+            const videoSource = docClone.querySelector("#video-source");
+            videoSource.setAttribute("src", embeddedVideoDataUrl);
+
+            // Hapus kotak tombol upload agar Keisha melihat tampilan yang bersih
+            const loaderBox = docClone.querySelector("#video-loader-box");
+            if (loaderBox) loaderBox.remove();
+
+            const finalHtml = "<!DOCTYPE html>\n" + docClone.outerHTML;
+            const blob = new Blob([finalHtml], { type: "text/html" });
+            const url = URL.createObjectURL(blob);
+
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "Special_For_Keisha.html";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Inisialisasi saat halaman pertama kali dibuka
+        window.onload = function() {
+            renderPinBoxes();
+            startCounter();
+        };
+    </script>
+</body>
+</html>
